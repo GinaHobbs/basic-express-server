@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage --verbose",
-    "start": "node index.js"
+    "init": "sequelize db:create",
+    "start": "NODE_ENV=production node index.js",
+    "dev": "nodemon index.js",
+    "test": "NODE_ENV=test jest --coverage --verbose",
+    "test-watch": "NODE_ENV=test jest --verbose --watchAll"
   },
   "repository": {
     "type": "git",
