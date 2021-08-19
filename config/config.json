@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "ginahobbs",
+    "password": "root",
+    "database": "cheeseandmeat",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "username",
+    "password": "password",
+    "database": "cheeseandmeat",
+    "host": "127.0.0.1",
+    "dialect": "sqlite:memory:"
+  },
+  "production": {
+    "username": "ginahobbs",
+    "password": "root",
+    "database": "cheeseandmeat",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
