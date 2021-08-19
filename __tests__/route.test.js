@@ -5,12 +5,12 @@ const mockRequest = supertest(server);
 
 describe('API SERVER:', () => {
   
-  beforeAll(async () => {
+  beforeEach(async () => {
     await db.sync();
     mockRequest.post('/cheese').send({ type: 'cheddar' })
   })
 
-  afterAll(async () => {
+  afterEach(async () => {
     await db.drop();
   })
 
