@@ -6,16 +6,20 @@ const notFoundHandler = require('./error-handlers/404.js')
 const errors = require('./error-handlers/500.js');
 const nameVal = require('./middleware/validator.js');
 const logger = require('./middleware/logger.js');
+const cheeseRoutes = require('../routes/cheese.js');
+const meatRoutes = require('../routes/meat.js');
+
+app.use(express.json());
+app.use(cheeseRoutes);
+app.use(meatRoutes);
 
 app.get('/person', logger, nameVal, (req,res) => {
-  if (req.query.name) {
-    nameObj = {
+  console.log(req.query)
+    const nameObj = {
       name : req.query.name
     }
+    console.log(nameObj)
     res.status(200).send(nameObj)
-  } else {
-    res.status(500).send()
-  }
 })
 
 app.get('/500-route', logger, (req, res) => {
