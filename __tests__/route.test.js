@@ -5,12 +5,12 @@ const mockRequest = supertest(server);
 
 describe('API SERVER:', () => {
   
-  beforeEach(async () => {
+  beforeAll(async () => {
     await db.sync();
-    mockRequest.post('/cheese').send({ type: 'cheddar' })
+    await mockRequest.post('/cheese').send({ type: 'cheddar' })
   })
 
-  afterEach(async () => {
+  afterAll(async () => {
     await db.drop();
   })
 
@@ -35,34 +35,23 @@ describe('API SERVER:', () => {
       })
   })
 
-  it('should get a single cheese', () => {
-    mockRequest.get('/cheese')
-      .then(results => {
-        mockRequest.get(`/cheese/${results.id}`);
-      })
-        .then(response => {
-          expect(response.status).toBe(200);
-        })
+  it('should get a single cheese', async () => {
+    let results = await mockRequest.get('/cheese')
+    let response = await mockRequest.get(`/cheese/${results.body[0].id}`)
+    expect(response.status).toBe(200);
   })
 
-  it('should update a single cheese', () => {
-    mockRequest.get('/cheese')
-      .then(results => {
-        mockRequest.update(`/cheese/${results.id}`).send({ type: 'mozzarella'})
-      })
-        .then(response => {
-          expect(response.status).toBe(202);
-        })
+  it('should update a single cheese', async () => {
+    let results = await mockRequest.get('/cheese')
+    let response = await mockRequest.put(`/cheese/${results.body[0].id}`).send({ type: 'mozzarella'})
+    expect(response.status).toBe(202);
   })
 
-  it('should delete a single cheese', () => {
-    mockRequest.get('/cheese')
-      .then(results => {
-        mockRequest.destroy(`/cheese/${results.id}`)
-      })
-        .then(response => {
-          expect(response.status).toEqual(204);
-        })
+  it('should delete a single cheese', async () => {
+    let results = await mockRequest.get('/cheese')
+    console.log("DELETE", results.body)
+    let response = await mockRequest.delete(`/cheese/${results.body[0].id}`)
+    expect(response.status).toEqual(204);
   })
 
 })
