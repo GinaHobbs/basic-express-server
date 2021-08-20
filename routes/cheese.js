@@ -6,20 +6,20 @@ const { Cheese } = require('../models/index.js');
 const cheeseRoutes = express.Router();
 
 cheeseRoutes.get('/cheese', getCheese);
-cheeseRoutes.get('cheese/:id', getOneCheese);
+cheeseRoutes.get('/cheese/:id', getOneCheese);
 cheeseRoutes.post('/cheese', createCheese);
 cheeseRoutes.put('/cheese/:id', updateCheese);
-cheeseRoutes.delete('cheese/:id', deleteCheese);
+cheeseRoutes.delete('/cheese/:id', deleteCheese);
 
 async function getCheese(req, res) {
   let allCheese = await Cheese.findAll();
-  req.status(200).json(allCheese)
+  res.status(200).json(allCheese)
 }
 
 async function getOneCheese(req,res) {
   const id = parseInt(req.params.id)
   let cheese = await Cheese.findOne({ where: { id: id }})
-  req.status(200).json(cheese);
+  res.status(200).json(cheese);
 }
 
 async function createCheese(req,res) {
