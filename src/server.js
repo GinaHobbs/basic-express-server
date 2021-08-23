@@ -6,10 +6,8 @@ const notFoundHandler = require('./error-handlers/404.js')
 const errors = require('./error-handlers/500.js');
 const nameVal = require('./middleware/validator.js');
 const logger = require('./middleware/logger.js');
-const cheeseRoutes = require('../routes/cheese.js');
-const meatRoutes = require('../routes/meat.js');
-const cheeseSchema = require('../models/cheese.js')
-const meatSchema = require('../models/meat.js');
+const cheeseRoutes = require('./routes/cheese.js');
+const meatRoutes = require('./routes/meat.js');
 
 app.use(express.json());
 

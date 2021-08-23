@@ -1,6 +1,6 @@
 const { server } = require('../src/server.js');
 const supertest = require('supertest');
-const { db } = require('../models/index.js');
+const { db } = require('../src/models/index.js');
 const mockRequest = supertest(server);
 
 describe('API SERVER:', () => {

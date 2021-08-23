@@ -2,7 +2,8 @@
 
 const express = require('express');
 const { Cheese } = require('../models/index.js');
-
+const Collection = require('../lib/collection.js')
+const cheeseCollection = new Collection(Cheese);
 const cheeseRoutes = express.Router();
 
 cheeseRoutes.get('/cheese', getCheese);
@@ -12,8 +13,9 @@ cheeseRoutes.put('/cheese/:id', updateCheese);
 cheeseRoutes.delete('/cheese/:id', deleteCheese);
 
 async function getCheese(req, res) {
-  let allCheese = await Cheese.findAll();
-  res.status(200).json(allCheese)
+  // let allCheese = await Cheese.findAll();
+  cheeseCollection.read();
+  // res.status(200).json(allCheese)
 }
 
 async function getOneCheese(req,res) {
@@ -23,8 +25,9 @@ async function getOneCheese(req,res) {
 }
 
 async function createCheese(req,res) {
-  let cheese = await Cheese.create(req.body);
-  res.status(201).json(cheese);
+  cheeseCollection.create(req.body)
+  // let cheese = await Cheese.create(req.body);
+  // res.status(201).json(cheese);
 }
 
 async function updateCheese(req,res) {

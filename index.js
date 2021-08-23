@@ -2,7 +2,7 @@
 require('dotenv').config()
 
 const server = require('./src/server.js');
-const { db } = require('./models/index.js');
+const { db } = require('./src/models/index.js');
 
 db.sync()
   .then(() => {
